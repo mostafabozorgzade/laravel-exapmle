@@ -10,7 +10,6 @@ it('can test', function () {
         ->assertExitCode(0);
 });
 
-
 it('can output the another value', function () {
 
     config()->set('exapmle.command_output', 'something else');

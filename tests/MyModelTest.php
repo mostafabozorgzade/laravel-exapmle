@@ -3,8 +3,7 @@
 use Mostafabozorgzade\Example\MyModel;
 
 it('can create a model', function () {
-        $myModel = MyModel::factory()->create();
+    $myModel = MyModel::factory()->create();
 
-        $this->assertModelExists($myModel);
+    $this->assertModelExists($myModel);
 });
-
