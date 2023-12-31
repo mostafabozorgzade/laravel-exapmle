@@ -2,24 +2,41 @@
 
 namespace Mostafabozorgzade\Example;
 
+use Illuminate\Support\Facades\Route;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Mostafabozorgzade\Example\Commands\ExampleCommand;
+use Mostafabozorgzade\Example\Http\Controllers\MyController;
 
 class ExampleServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        /*
-         * This class is a Package Service Provider
-         *
-         * More info: https://github.com/spatie/laravel-package-tools
-         */
         $package
             ->name('laravel-exapmle')
             ->hasConfigFile()
             ->hasViews()
-            ->hasMigration('create_laravel-exapmle_table')
+            ->hasMigration('create_my_models_table')
             ->hasCommand(ExampleCommand::class);
+    }
+
+    public function packageRegistered()
+    {
+
+        Route::macro('example', function(string $baseUrl = 'example'){
+
+            Route::prefix($baseUrl)->group(function(){
+                Route::get('/', [MyController::class, 'index']);
+
+            });
+            
+        });
+
+
+        // in the package
+        // "/example", "/custom-route"
+
+        // Route::example('custom-route'); 
+
     }
 }
